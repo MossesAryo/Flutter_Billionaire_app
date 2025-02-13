@@ -18,6 +18,23 @@ class MyApp extends StatelessWidget {
           title: Text("Billionaire App"),
           backgroundColor: CupertinoColors.darkBackgroundGray,
         ),
+        body: Container(
+          padding: EdgeInsets.all(20),
+          color: Colors.blueGrey[700],
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Balance :"),
+              ElevatedButton(
+                  onPressed: () {
+                    Text("button is clicked");
+                  },
+                  child: Text("click"))
+            ],
+          ),
+        ),
       ),
     );
   }
