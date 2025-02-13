@@ -5,8 +5,22 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double balance = 0;
+  void addMoney() {
+   
+    
+    setState(() {
+       balance = balance + 500;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +29,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Billionaire App"),
+          title: Text('Billionaire App'),
           backgroundColor: CupertinoColors.darkBackgroundGray,
         ),
         body: Container(
@@ -31,25 +45,22 @@ class MyApp extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Bank Balance :"),
+                    Text('Bank Balance :'),
                     SizedBox(
                       height: 20,
                     ),
-                    Text("0")
+                    Text('$balance')
                   ],
                 ),
               ),
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red[700],
-                    minimumSize: Size(double.infinity, 0)
-                  ),
-                    onPressed: () {
-                      Text("button is clicked");
-                    },
-                    child: Text("Add Money")),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red[700],
+                        minimumSize: Size(double.infinity, 0)),
+                    onPressed: addMoney,
+                    child: Text('Add Money')),
               )
             ],
           ),
