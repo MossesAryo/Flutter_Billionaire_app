@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 class BalanceView extends StatelessWidget {
   double balance;
 
-   BalanceView({super.key,required this.balance});
+  BalanceView({super.key, required this.balance});
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +13,17 @@ class BalanceView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Bank Balance : '),
+          Text(
+            'Bank Balance : ',
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+          ),
           SizedBox(
             height: 20,
           ),
-          Text('$balance'),
+          Text(
+            ' ${NumberFormat.simpleCurrency().format(balance)}',
+            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );
