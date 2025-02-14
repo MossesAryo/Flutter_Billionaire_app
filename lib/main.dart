@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,13 +15,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   double balance = 0;
-  void addMoney() {
-   
-    
+  void addMoney() async {
     setState(() {
-       balance = balance + 500;
+      balance = balance + 500;
+    });
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('decimal', balance);
+    print(balance);
+  }
+
+  void loadBalance() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    
+
+
+    setState(() {
+      balance = prefs.getDouble('decimal') ?? 0;
     });
   }
+  // Obtain shared preferences.
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +62,10 @@ class _MyAppState extends State<MyApp> {
                     SizedBox(
                       height: 20,
                     ),
-                    Text('$balance')
+                    Text('$balance'),
+                    OutlinedButton(
+                      onPressed: loadBalance, 
+                      child: Text('Load Balance'),)
                   ],
                 ),
               ),
