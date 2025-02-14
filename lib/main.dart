@@ -24,10 +24,13 @@ class _MyAppState extends State<MyApp> {
     print(balance);
   }
 
+  @override
+  void initState() {
+    loadBalance();
+  }
+
   void loadBalance() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    
-
 
     setState(() {
       balance = prefs.getDouble('decimal') ?? 0;
@@ -63,9 +66,6 @@ class _MyAppState extends State<MyApp> {
                       height: 20,
                     ),
                     Text('$balance'),
-                    OutlinedButton(
-                      onPressed: loadBalance, 
-                      child: Text('Load Balance'),)
                   ],
                 ),
               ),
